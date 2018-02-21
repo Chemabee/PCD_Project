@@ -6,6 +6,10 @@ public class Gate {
 	
 	private static Gate instance;
 	
+	private Gate() {
+		
+	}
+	
 	public Gate getGate() {
 		if(instance == null)
 			instance = new Gate();
