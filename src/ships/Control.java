@@ -29,7 +29,8 @@ public class Control {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}		
+			}
+		System.out.println(s.name+ " going to enter");
 		entering++;
 	}
 	
@@ -49,6 +50,7 @@ public class Control {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		System.out.println(s.name + " going to exit");
 		exiting++;
 	}
 	
