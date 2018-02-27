@@ -24,8 +24,7 @@ public class Control {
 	public synchronized void entryPermission(Ship s) {
 		while (exiting > 0 || waitExit > 0)
 			try {
-				System.out.println(s.name+" waiting for entering...");
-
+				System.out.println("="+s.name+" waiting for entering...");
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -44,14 +43,14 @@ public class Control {
 	public synchronized void exitPermission(Ship s) {
 		while(entering>0)
 			try {
-				System.out.println(s.name+" waiting for exiting...");
+				System.out.println("="+s.name+" waiting for exiting...");
 				waitExit++;
 				wait();
 				waitExit--;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		System.out.println(s.name + " going to exit");
+//		System.out.println(s.name + " going to exit");
 		exiting++;
 		
 	}

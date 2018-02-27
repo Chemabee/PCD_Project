@@ -16,15 +16,15 @@ public class Gate {
 		return instance;
 	}
 	
-	public static void enter(Ship s) {
+	public static synchronized void enter(Ship s) {
 		for(int i=0;i<3;i++)
-			System.out.println("The ship " + s.name + " is entering.");
+			System.out.println("#The ship " + s.name + " is entering.");
 		s.type = 0;
 	}
 	
-	public static void exit(Ship s) {
+	public static synchronized void exit(Ship s) {
 		for(int i=0;i<3;i++)
-			System.out.println("The ship " + s.name + " is exiting.");
+			System.out.println("@The ship " + s.name + " is exiting.");
 		s.type = 1;
 	}
 	
