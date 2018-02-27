@@ -14,14 +14,14 @@ public class Ship implements Runnable {
 	public void action() {
 		switch(this.type) {
 		case(0):
-			Control.getControl().entryPermission(this);
+			Control.getControl().exitPermission(this);
 			Gate.exit(this);
-			Control.getControl().entryNotification(this);
+			Control.getControl().exitNotification(this);
 			break;
 		case(1):
-			Control.getControl().exitPermission(this);
+			Control.getControl().entryPermission(this);
 			Gate.enter(this);
-			Control.getControl().exitNotification(this);
+			Control.getControl().entryNotification(this);
 			break;
 		default:
 			System.out.println("Ship not valid (only type 1 or 2)");
