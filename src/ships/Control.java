@@ -22,7 +22,7 @@ public class Control {
 
 	//Entry protocol
 	public synchronized void entryPermission(Ship s) {
-		while (exiting > 0 && waitExit > 0)
+		while (exiting > 0 || waitExit > 0)
 			try {
 				System.out.println(s.name+" waiting for entering...");
 
@@ -47,16 +47,17 @@ public class Control {
 				System.out.println(s.name+" waiting for exiting...");
 				waitExit++;
 				wait();
+				waitExit--;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		System.out.println(s.name + " going to exit");
 		exiting++;
+		
 	}
 	
 	public synchronized void exitNotification(Ship s) {
 		exiting--;
-		waitExit--;
 		if(exiting==0)
 			notifyAll();
 	}
