@@ -1,5 +1,7 @@
 package ships;
 
+import java.util.LinkedList;
+
 public class Control {
 	
 	private int entering;
@@ -8,6 +10,9 @@ public class Control {
 	private int waitExit;
 	
 	private static Control instance;
+	
+	private LinkedList<Ship> EntryQueue = new LinkedList<Ship>();
+	private LinkedList<Ship> ExitQueue = new LinkedList<Ship>();
 	
 	private Control() {
 		entering = 0;
@@ -22,13 +27,15 @@ public class Control {
 
 	//Entry protocol
 	public synchronized void entryPermission(Ship s) {
-		while (exiting > 0 || waitExit > 0)
+		EntryQueue.add(s);
+		while (exiting > 0 || waitExit > 0 || EntryQueue.peekFirst() != s)
 			try {
-				System.out.println("="+s.name+" waiting for entering...");
+				System.out.println("="+s.name+" waiting for entering...");	
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		EntryQueue.removeFirst();
 		System.out.println(s.name+ " going to enter");
 		entering++;
 	}
@@ -41,7 +48,8 @@ public class Control {
 	
 	//Exit protocol
 	public synchronized void exitPermission(Ship s) {
-		while(entering>0)
+		ExitQueue.add(s);
+		while (entering > 0 || ExitQueue.peekFirst() != s)
 			try {
 				System.out.println("="+s.name+" waiting for exiting...");
 				waitExit++;
@@ -50,7 +58,8 @@ public class Control {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-//		System.out.println(s.name + " going to exit");
+		ExitQueue.removeFirst();
+		System.out.println(s.name + " going to exit");
 		exiting++;
 		
 	}
