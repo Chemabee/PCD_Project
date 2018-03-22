@@ -1,14 +1,19 @@
 package ships;
 
+import java.util.concurrent.locks.*;
 import javax.management.monitor.Monitor;
 
 public class Platform extends Monitor {
 
 	public int type;	// 0 = empty // 1 = sugar // 2 = flour // 3 = salt //
 	private static Platform instance=null;
-	Lock l
+	Lock l = new ReentrantLock();
 	
-	
+	Condition salt = l.newCondition();
+	Condition sugar = l.newCondition();
+	Condition flour = l.newCondition();
+	Condition cargo = l.newCondition();
+
 	public Platform(){
 		type = 0;
 	}
@@ -21,26 +26,50 @@ public class Platform extends Monitor {
 
 	void getProduct(int craneType) {
 		while(true) {
-			while(type != craneType)
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+			l.lock();
+			while(type != craneType){
+				try{
+					switch(craneType){
+						case 1:
+							sugar.await();
+							type = 0; //Remove the container from the platform
+							System.out.println("*Crane 1 removed a sugar container from the platform.");
+							cargo.signal();
+							break;
+						case 2:
+							flour.await();
+							type = 0; //Remove the container from the platform
+							System.out.println("#Crane 2 removed a flour container from the platform.");
+							cargo.signal();
+							break;
+						case 3:
+							salt.await();
+							type = 0; //Remove the container from the platform
+							System.out.println("$Crane 3 removed a salt container from the platform.");
+							cargo.signal();
+							break;
+						}
+					}
+					catch  (InterruptedException e){
+						e.printStackTrace();
+					}	finally{
+						l.unlock();}
 				}
-			type = 0; //Remove the container from the platform
-			System.out.println("Crane "+craneType+" removed a container from the platform.");
 		}
 	}
 
-	void depositProduct(int craneType){
+	void depositProduct(int containerType){
+		l.lock();
 		while(type != 0){
-			try{
-				wait();
-			} catch (InterruptedException e){
+			try {
+				cargo.await();
+				type = containerType; //Deposit the item in the Platform
+				System.out.println("Cargo ship has deposited a container "+type+" in the platform.");
+			} catch (InterruptedException e) {
 				e.printStackTrace();
+			} finally{
+				l.unlock();
 			}
-		type = craneType; //Deposit the item in the Platform
-		System.out.println("Cargo ship has deposited a container "+type+" in the platform.");
 		}
 	}
 
