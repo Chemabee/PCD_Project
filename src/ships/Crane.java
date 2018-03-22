@@ -12,7 +12,8 @@ public class Crane implements Runnable {
 
 	@Override
 	public void run() {
-		Platform.getPlatform.getProduct(this.type);		
+		Platform p = Platform.getPlatform();
+		p.getProduct(this.type);
 	}
 
 }

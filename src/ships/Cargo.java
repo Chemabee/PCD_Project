@@ -24,15 +24,15 @@ public class Cargo extends Ship {
 
 	public void run(){
 		while(sugarCount>0){
-			Platform.getPlatform.depositProduct(1);
+			Platform.getPlatform().depositProduct(1);
 			sugarCount--;
 		}
 		while(flourCount>0){
-			Platform.getPlatform.depositProduct(2);
+			Platform.getPlatform().depositProduct(2);
 			flourCount--;
 		}
 		while(saltCount>0){
-			Platform.getPlatform.depositProduct(3);
+			Platform.getPlatform().depositProduct(3);
 			saltCount--;
 		}
 	}

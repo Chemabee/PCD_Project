@@ -5,12 +5,13 @@ import javax.management.monitor.Monitor;
 public class Platform extends Monitor {
 
 	public int type;	// 0 = empty // 1 = sugar // 2 = flour // 3 = salt //
-
+	private static Platform instance=null;
+	
 	public Platform(){
 		type = 0;
 	}
 
-	public Platform getPlatform() {
+	public static Platform getPlatform() {
 		if(instance == null)
 			instance = new Platform();
 		return instance;
