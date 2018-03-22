@@ -1,6 +1,5 @@
 package ships;
 
-import java.util.Random;
 
 public class Cargo extends Ship {
 
