@@ -6,6 +6,8 @@ public class Platform extends Monitor {
 
 	public int type;	// 0 = empty // 1 = sugar // 2 = flour // 3 = salt //
 	private static Platform instance=null;
+	Lock l
+	
 	
 	public Platform(){
 		type = 0;
