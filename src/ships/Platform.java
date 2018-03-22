@@ -27,35 +27,35 @@ public class Platform extends Monitor {
 	void getProduct(int craneType) {
 		while(true) {
 			l.lock();
-			try {
-				switch (craneType) {
-				case 1:
-					while (type != craneType)
-						sugar.await();
-					type = 0; // Remove the container from the platform
-					System.out.println("*Crane 1 removed a sugar container from the platform.");
-					cargo.signal();
-					break;
-				case 2:
-					while (type != craneType)
-						flour.await();
-					type = 0; // Remove the container from the platform
-					System.out.println("#Crane 2 removed a flour container from the platform.");
-					cargo.signal();
-					break;
-				case 3:
-					while (type != craneType)
-						salt.await();
-					type = 0; // Remove the container from the platform
-					System.out.println("$Crane 3 removed a salt container from the platform.");
-					cargo.signal();
-					break;
-				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} finally {
-				l.unlock();
-			}
+			try{
+					switch(craneType){
+						case 1:
+							while(type != craneType)
+								sugar.await();
+							type = 0; //Remove the container from the platform
+							System.out.println("*Crane 1 removed a sugar container from the platform.");
+							cargo.signal();
+							break;
+						case 2:
+							while(type != craneType)
+								flour.await();
+							type = 0; //Remove the container from the platform
+							System.out.println("#Crane 2 removed a flour container from the platform.");
+							cargo.signal();
+							break;
+						case 3:
+							while(type != craneType)
+								salt.await();
+							type = 0; //Remove the container from the platform
+							System.out.println("$Crane 3 removed a salt container from the platform.");
+							cargo.signal();
+							break;
+						}
+					}
+				catch  (InterruptedException e){
+					e.printStackTrace();
+				}	finally{
+					l.unlock();}
 		}
 	}
 
@@ -67,6 +67,17 @@ public class Platform extends Monitor {
 				}
 				type = containerType; //Deposit the item in the Platform
 				System.out.println("Cargo ship has deposited a container "+type+" in the platform.");
+				switch(type){
+					case 1:
+						sugar.signal();
+						break;
+					case 2:
+						flour.signal();
+						break;
+					case 3:
+						salt.signal();
+						break;
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} finally{

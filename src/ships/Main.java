@@ -9,18 +9,17 @@ public class Main {
 //		for(int i=1;i<11;i++){
 //			new Thread(new Ship(1,"SEnter "+i)).start();
 //		}
-		System.out.println("runeando cargo");
-		Thread cargo = new Thread(new Cargo());
-		cargo.run();
-		
 System.out.println("empezando esto");
+		Thread cargo = new Thread(new Cargo());
 		Thread sugar = new Thread(new Crane(1));
 		Thread flour = new Thread(new Crane(2));
 		Thread salt = new Thread(new Crane(3));
+System.out.println("runeando");
+		cargo.start();
 System.out.println("runeando cranes");
-		sugar.run();
-		flour.run();
-		salt.run();
+		sugar.start();
+		flour.start();
+		salt.start();
 
 
 //		Thread t1 = new Thread(new Ship(0,  "SExit 1"));
