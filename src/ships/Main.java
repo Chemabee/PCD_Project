@@ -10,6 +10,7 @@ public class Main {
 //			new Thread(new Ship(1,"SEnter "+i)).start();
 //		}
 System.out.println("empezando esto");
+		Platform p = Platform.getPlatform();
 		Thread cargo = new Thread(new Cargo());
 		Thread sugar = new Thread(new Crane(1));
 		Thread flour = new Thread(new Crane(2));
