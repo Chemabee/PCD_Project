@@ -3,12 +3,12 @@ package ships;
 public class Main {
 	public static void main(String args[]) {
 
-//		for(int i=1;i<11;i++){
-//			new Thread(new Ship(0,"SExit "+i)).start();
-//		}
-//		for(int i=1;i<11;i++){
-//			new Thread(new Ship(1,"SEnter "+i)).start();
-//		}
+		for(int i=1;i<11;i++){
+			new Thread(new Ship(0,"SExit "+i)).start();
+		}
+		for(int i=1;i<11;i++){
+			new Thread(new Ship(1,"SEnter "+i)).start();
+		}
 System.out.println("empezando esto");
 		Platform p = Platform.getPlatform();
 		Thread cargo = new Thread(new Cargo());
