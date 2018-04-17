@@ -5,7 +5,6 @@ import javax.management.monitor.Monitor;
 
 public class Platform extends Monitor {
 
-	public int numOilCont = 5;
 	public int type; // 0 = empty // 1 = sugar // 2 = flour // 3 = salt //
 	private static Platform instance = null;
 	Lock l = new ReentrantLock();
@@ -26,7 +25,7 @@ public class Platform extends Monitor {
 	}
 
 	void getProduct(int craneType) {
-		while (true) {// sabemos que esto es incorrecto, pero lo dejaremos así hasta corregir el
+		while (true) {// sabemos que esto es incorrecto, pero lo dejaremos asï¿½ hasta corregir el
 						// codigo
 			l.lock();
 			try {
