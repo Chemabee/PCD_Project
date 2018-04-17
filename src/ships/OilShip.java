@@ -6,7 +6,6 @@ public class OilShip extends Ship {
 	public int waterCont = 0;
 	public int id;
 
-
 	public OilShip(int type, String name, int id) {
 		super(type, name);
 		this.id = id;
@@ -21,24 +20,26 @@ public class OilShip extends Ship {
 			e.printStackTrace();
 		}
 		this.action();
-
 	}
-	public void charge() throws InterruptedException{
-		while(oilCont < 3000){
+
+	public void charge() throws InterruptedException {
+		while (oilCont < 3000) {
+			System.out.println("ship " + this.id + " GOING to GET OIL");
 			this.getOil();
+			System.out.println(this.id + " oil: " + this.oilCont);
 		}
-
-		while(waterCont < 5000){
+		while (waterCont < 5000) {
 			getWater();
+			System.out.println(this.id + " water: " + this.waterCont);
 		}
 	}
 
-	public void getOil()throws InterruptedException {
+	public void getOil() throws InterruptedException {
 		ChargeZone z = ChargeZone.getChargeZone();
 		z.getOil(this);
 	}
 
-	public void getWater() throws InterruptedException{
+	public void getWater() throws InterruptedException {
 		ChargeZone z = ChargeZone.getChargeZone();
 		z.getWater(this);
 	}
