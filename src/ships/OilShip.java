@@ -15,11 +15,15 @@ public class OilShip extends Ship {
 	@Override
 	public void run() {
 		this.action();
-		this.charge();
+		try {
+			this.charge();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.action();
 
 	}
-	public void charge() {
+	public void charge() throws InterruptedException{
 		while(oilCont < 3000){
 			this.getOil();
 		}
@@ -29,12 +33,12 @@ public class OilShip extends Ship {
 		}
 	}
 
-	public void getOil() {
+	public void getOil()throws InterruptedException {
 		ChargeZone z = ChargeZone.getChargeZone();
 		z.getOil(this);
 	}
 
-	public void getWater(){
+	public void getWater() throws InterruptedException{
 		ChargeZone z = ChargeZone.getChargeZone();
 		z.getWater(this);
 	}

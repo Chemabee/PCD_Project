@@ -24,31 +24,31 @@ public class ChargeZone{
     return instance;
   }
 
-  public void shipSignal(Ship s)throws InterruptedException{
-    acquire(mutex);
+  public void shipSignal(OilShip s)throws InterruptedException{
+    mutex.acquire();
     contShip++;
     if(contShip==5){
       this.filler();
       contShip = 0;
     }
-    release(mutex);
+    mutex.release();
   }
 
-  public void getOil(Ship s)throws InterruptedException{
-    acquire(oil[s.id]);
+  public void getOil(OilShip s)throws InterruptedException{
+    oil[s.id].acquire();
     s.oilCont+=1000;
     shipSignal(s);
   }
 
-  public void getWater(Ship s)throws InterruptedException{
-    acquire(water);
+  public void getWater(OilShip s)throws InterruptedException{
+    water.acquire();
     s.waterCont+=1000;
-    release(water);
+    water.release();
   }
 
   public void filler()throws InterruptedException{
     for(int i=0;i<5;i++)
-      release(oil[i]);
+      oil[i].release();
   }
 
 
