@@ -10,7 +10,7 @@ public class Crane implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println("runeando " + type);
+		System.out.println("running crane " + type);
 		Platform.getPlatform().getProduct(this.type);
 	}
 

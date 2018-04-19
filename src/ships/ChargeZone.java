@@ -31,8 +31,9 @@ public class ChargeZone {
 			System.out.println("ContShip == 5. Filler working...");
 			this.filler();
 			contShip = 0;
-		} else
-			System.out.println("ContShip == " + contShip + ". Filler IS NOT WORKING.");
+		} 
+//		else
+//			System.out.println("ContShip == " + contShip + ". Filler IS NOT WORKING.");
 		mutex.release();
 	}
 
@@ -50,6 +51,7 @@ public class ChargeZone {
 	}
 
 	public void filler() throws InterruptedException {
+		//Esto debería ser una entidad a parte
 		for (int i = 0; i < 5; i++)
 			oil[i].release();
 		System.out.println("filler");

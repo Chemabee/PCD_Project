@@ -24,9 +24,9 @@ public class Main {
 		Thread sugar = new Thread(new Crane(1));
 		Thread flour = new Thread(new Crane(2));
 		Thread salt = new Thread(new Crane(3));
-		System.out.println("runeando");
+//		System.out.println("runeando");
 		cargo.start();
-		System.out.println("runeando cranes");
+//		System.out.println("runeando cranes");
 		sugar.start();
 		flour.start();
 		salt.start();
