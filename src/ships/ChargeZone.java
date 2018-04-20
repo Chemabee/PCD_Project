@@ -12,17 +12,29 @@ public class ChargeZone {
 	private Semaphore[] oil = new Semaphore[5];
 	private static ChargeZone instance = null;
 
+	/**
+	 * Default constructor
+	 */
 	private ChargeZone() {
 		for (int i = 0; i < 5; i++)
 			oil[i] = new Semaphore(0);
 	}
 
+	/**
+	 * Singleton method
+	 * @return :instance of the Object
+	 */
 	public static ChargeZone getChargeZone() {
 		if (instance == null)
 			instance = new ChargeZone();
 		return instance;
 	}
 
+	/**
+	 * Signal done by a ship when it enters in the chargeZone
+	 * @param s :Ship Object
+	 * @throws InterruptedException
+	 */
 	public void shipSignal(OilShip s) throws InterruptedException {
 		System.out.println("ShipSignal " + s.id);
 		mutex.acquire();
@@ -37,6 +49,11 @@ public class ChargeZone {
 		mutex.release();
 	}
 
+	/**
+	 * 
+	 * @param s
+	 * @throws InterruptedException
+	 */
 	public void getOil(OilShip s) throws InterruptedException {
 		shipSignal(s);
 		oil[s.id].acquire();
