@@ -26,7 +26,7 @@ public class OilShip extends Ship {
 			e.printStackTrace();
 		}
 		executor.shutdown();//antes de salir espera a acabar con las tareas, no acepta nuevas
-		this.action();
+		this.action(); //TODO no puede hacer esto hasta que haya cargado aceite y agua, hay que corregirlo.
 
 	}
 

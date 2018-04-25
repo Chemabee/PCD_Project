@@ -12,7 +12,6 @@ public class Main {
 //			new Thread(new Ship(1, "SEnter " + i)).start();
 //		}
 
-		System.out.println("chargeando");
 		for (int i = 0; i < 5; i++) {
 			new Thread(new OilShip(1, "OilShip " + i, i)).start();
 		}
