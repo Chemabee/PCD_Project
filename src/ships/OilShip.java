@@ -36,7 +36,9 @@ public class OilShip extends Ship {
 	 */
 	public void charge() throws InterruptedException {
 		ChargeZone z = ChargeZone.getChargeZone();
+		System.out.println("task 1 de "+this.id);
 		executor.execute(new Task(0,z,this));
+		System.out.println("task 2 de "+this.id);
 		executor.execute(new Task(1,z,this));
 		
 	}

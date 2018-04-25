@@ -33,7 +33,6 @@ public class Task implements Runnable {
 				try {
 					c.getWater(s);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println(s.getId() + " water: " + s.getWaterCont());
