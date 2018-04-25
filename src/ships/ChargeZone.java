@@ -1,8 +1,12 @@
 package ships;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
+
 public class ChargeZone {
+	
+
 
 	private Semaphore water = new Semaphore(1);
 	private Semaphore mutex = new Semaphore(1);
@@ -50,8 +54,8 @@ public class ChargeZone {
 	}
 
 	/**
-	 * 
-	 * @param s
+	 * Mehtod for getting oil to an OilShip
+	 * @param s :Ship doing the action
 	 * @throws InterruptedException
 	 */
 	public void getOil(OilShip s) throws InterruptedException {
@@ -61,12 +65,28 @@ public class ChargeZone {
 		System.out.println("Ship " + s.id + " has filled oil. Going to do signal");
 	}
 
+	/**
+	 * Mehtod for getting water to an OilShip
+	 * @param s :Ship doing the action
+	 * @throws InterruptedException
+	 */
 	public void getWater(OilShip s) throws InterruptedException {
 		water.acquire();
 		s.waterCont += 1000;
 		water.release();
 	}
-
+	
+	public void exeOil(OilShip s) {
+		
+	}
+	public void exeWater(OilShip s) {
+		
+	}
+	
+	/**
+	 * Mehtod that fills the Oil and Water containers
+	 * @throws InterruptedException
+	 */
 	public void filler() throws InterruptedException {
 		//Esto debería ser una entidad a parte
 		for (int i = 0; i < 5; i++)
