@@ -35,29 +35,26 @@ public class OilShip extends Ship {
 	 * @throws InterruptedException
 	 */
 	public void charge() throws InterruptedException {
-		ChargeZone z = ChargeZone.getChargeZone();
 		System.out.println("task 1 de "+this.id);
-		executor.execute(new Task(0,z,this));
+		executor.execute(new Task(0,this));
 		System.out.println("task 2 de "+this.id);
-		executor.execute(new Task(1,z,this));
+		executor.execute(new Task(1,this));
 		
 	}
 
 	public void getOilAction() throws InterruptedException {
-		ChargeZone z = ChargeZone.getChargeZone();
 		while (oilCont < 3000) {
 			System.out.println("ship " + this.id + " GOING to GET OIL");
 //			this.getOil();
-			z.getOil(this);
+			ChargeZone.getChargeZone().getOil(this);
 			System.out.println(this.id + " oil: " + this.oilCont);
 		}
 
 	}
 
 	public void getWaterAction() throws InterruptedException {
-		ChargeZone z = ChargeZone.getChargeZone();
 		while (waterCont < 5000) {
-			z.getWater(this);
+			ChargeZone.getChargeZone().getWater(this);
 			System.out.println(this.id + " water: " + this.waterCont);
 		}
 

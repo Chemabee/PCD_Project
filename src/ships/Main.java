@@ -3,6 +3,8 @@ package ships;
 public class Main {
 	public static void main(String args[]) {
 
+		ChargeZone z = ChargeZone.getChargeZone(); //First of all create the Charge Zone to avoid multiple instances
+		
 //		for (int i = 1; i < 11; i++) {
 //			new Thread(new Ship(0, "SExit " + i)).start();
 //		}
@@ -10,7 +12,6 @@ public class Main {
 //			new Thread(new Ship(1, "SEnter " + i)).start();
 //		}
 
-		ChargeZone z = ChargeZone.getChargeZone();
 		System.out.println("chargeando");
 		for (int i = 0; i < 5; i++) {
 			new Thread(new OilShip(1, "OilShip " + i, i)).start();

@@ -3,15 +3,12 @@ package ships;
 public class Task implements Runnable {
 	
 	private int type;//0 -> Oil; 1 ->Water
-
-	private ChargeZone c;//Charge Zone
 	
 	private OilShip s;//ship doing the task
 	
 
-	public Task(int _type,ChargeZone _c,OilShip _s) {
+	public Task(int _type,OilShip _s) {
 		type = _type;
-		c = _c;
 		s = _s;
 	}
 	@Override
@@ -21,7 +18,7 @@ public class Task implements Runnable {
 				System.out.println("ship " + s.getId() + " GOING to GET OIL");
 //				this.getOil();
 				try {
-					c.getOil(s);
+					ChargeZone.getChargeZone().getOil(s);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -31,7 +28,7 @@ public class Task implements Runnable {
 		else {//Water Task
 			while(s.getWaterCont() < 5000) {
 				try {
-					c.getWater(s);
+					ChargeZone.getChargeZone().getWater(s);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
