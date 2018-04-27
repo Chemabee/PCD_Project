@@ -17,10 +17,10 @@ public class Main {
 		salt.start();
 		cargo.start();
 
-		for (int i = 31; i < 61; i++) {
+		for (int i = 11; i < 21; i++) {
 			new Thread(new Ship(0, "SExit " + i)).start();
 		}
-		for (int i = 1; i < 31; i++) {
+		for (int i = 1; i < 11; i++) {
 			new Thread(new Ship(1, "SEnter " + i)).start();
 		}
 		for (int i = 0; i < 5; i++) {
