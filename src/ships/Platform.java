@@ -27,7 +27,7 @@ public class Platform extends Monitor {
 	void getProduct(int craneType, Cargo c) {
 		int numContainers = 0;
 		numContainers = c.getContNumber(craneType);
-		while (numContainers>0) {// sabemos que esto es incorrecto, pero lo dejaremos as� hasta corregir el codigo
+		while (true/*numContainers>0*/) {// sabemos que esto es incorrecto, pero lo dejaremos as� hasta corregir el codigo
 			l.lock();
 			try {
 				switch (craneType) {
@@ -62,6 +62,7 @@ public class Platform extends Monitor {
 				l.unlock();
 			}
 			numContainers--;
+			System.out.println("Crane " + craneType + ": " + numContainers + " containers remaining.");
 		}
 	}
 
