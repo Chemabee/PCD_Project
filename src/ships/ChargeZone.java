@@ -10,9 +10,11 @@ public class ChargeZone {
 	private CyclicBarrier cb = new CyclicBarrier(5);
 
 	private Semaphore water = new Semaphore(1);
-	private Semaphore mutex = new Semaphore(1);
+//	private Semaphore mutex = new Semaphore(1);
 
-	private int contShip = 0;
+//	private int contShip = 0;
+	
+	private Filler filler;
 
 	private Semaphore[] oil = new Semaphore[5];
 	private static ChargeZone instance = null;
@@ -21,6 +23,7 @@ public class ChargeZone {
 	 * Default constructor
 	 */
 	private ChargeZone() {
+		filler = Filler.getFiller();
 		for (int i = 0; i < 5; i++)
 			oil[i] = new Semaphore(0);
 	}
@@ -36,13 +39,15 @@ public class ChargeZone {
 	}
 
 	/**
-	 * Mehtod for getting oil to an OilShip
+	 * Method for getting oil to an OilShip
 	 * @param s :Ship doing the action
 	 * @throws InterruptedException
 	 */
 	public void getOil(OilShip s) throws InterruptedException {
+		//TODO controlar que no pueda coger si esta vacio(aqui hay que usar el tercer tipo)
 //		oil[s.id].acquire();
 		s.oilCont += 1000;
+		filler.countDown();
 		System.out.println("Ship " + s.id + " has filled oil. Going to do signal");
 
 	}
@@ -62,20 +67,10 @@ public class ChargeZone {
 	 * @throws InterruptedException
 	 */
 	public void getWater(OilShip s) throws InterruptedException {
+		//TODO aqui no creo que haga falta usar nada
 		water.acquire();
 		s.waterCont += 1000;
 		water.release();
-	}
-
-	/**
-	 * Mehtod that fills the Oil containers
-	 * @throws InterruptedException
-	 */
-	public void filler() throws InterruptedException {
-		//TODO Esto deber�a ser una entidad a parte
-		for (int i = 0; i < 5; i++)
-			oil[i].release();
-		System.out.println("filler");
 	}
 
 }
