@@ -3,11 +3,14 @@ package ships;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.TimeUnit;
 
 
 public class ChargeZone {
 
 	private CyclicBarrier cb = new CyclicBarrier(5);
+	private SynchronousQueue<OilShip>[] bq = new SynchronousQueue[5];
 
 	private Semaphore water = new Semaphore(1);
 //	private Semaphore mutex = new Semaphore(1);
@@ -26,6 +29,9 @@ public class ChargeZone {
 		filler = Filler.getFiller();
 		for (int i = 0; i < 5; i++)
 			oil[i] = new Semaphore(0);
+		for (int i = 0; i < bq.length; i++) {
+			bq[i] = new SynchronousQueue<OilShip>();
+		}
 	}
 
 	/**
@@ -44,12 +50,10 @@ public class ChargeZone {
 	 * @throws InterruptedException
 	 */
 	public void getOil(OilShip s) throws InterruptedException {
-		//TODO controlar que no pueda coger si esta vacio(aqui hay que usar el tercer tipo)
-//		oil[s.id].acquire();
-		s.oilCont += 1000;
 		filler.countDown();
+		bq[s.getId()].offer(s, 1, TimeUnit.SECONDS);
+		s.oilCont += 1000;
 		System.out.println("Ship " + s.id + " has filled oil. Going to do signal");
-
 	}
 
 	public void shipArrived(){
@@ -68,9 +72,14 @@ public class ChargeZone {
 	 */
 	public void getWater(OilShip s) throws InterruptedException {
 		//TODO aqui no creo que haga falta usar nada
+		//El semáforo sí, para que no cojan agua varios a la vez (sólo hay un almacén de agua)
 		water.acquire();
 		s.waterCont += 1000;
 		water.release();
 	}
 
+	public SynchronousQueue<OilShip>[] getBQ(){
+		return this.bq;
+	}
+	
 }
