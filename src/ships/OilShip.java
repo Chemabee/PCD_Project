@@ -8,7 +8,7 @@ public class OilShip extends Ship {
 	public int oilCont = 0;
 	public int waterCont = 0;
 	public int id;
-	
+
 	private ThreadPoolExecutor executor;
 
 	public OilShip(int type, String name, int id) {
@@ -36,11 +36,11 @@ public class OilShip extends Ship {
 	 * @throws InterruptedException
 	 */
 	public void charge() throws InterruptedException {
-		System.out.println("task 1 de "+this.id);
+		System.out.println("Oil task del barco "+this.id);
 		executor.execute(new Task(0,this));
-		System.out.println("task 2 de "+this.id);
+		System.out.println("Water task del barco "+this.id);
 		executor.execute(new Task(1,this));
-		
+
 	}
 
 	public void getOilAction() throws InterruptedException {
@@ -84,7 +84,7 @@ public class OilShip extends Ship {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
+
+
 
 }
