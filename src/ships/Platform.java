@@ -24,9 +24,10 @@ public class Platform extends Monitor {
 		return instance;
 	}
 
-	void getProduct(int craneType) {
-		while (true) {// sabemos que esto es incorrecto, pero lo dejaremos as� hasta corregir el
-						// codigo
+	void getProduct(int craneType, Cargo c) {
+		int numContainers = 0;
+		numContainers = c.getContNumber(craneType);
+		while (numContainers>0) {// sabemos que esto es incorrecto, pero lo dejaremos as� hasta corregir el codigo
 			l.lock();
 			try {
 				switch (craneType) {
@@ -34,25 +35,25 @@ public class Platform extends Monitor {
 					while (type != craneType) {
 						sugar.await();
 					}
-					type = 0; // Remove the container from the platform
-					System.out.println("*Crane 1 removed a sugar container from the platform.");
-					cargo.signal();
+						type = 0; // Remove the container from the platform
+						System.out.println("*Crane 1 removed a sugar container from the platform.");
+						cargo.signal();
 					break;
 				case 2:
 					while (type != craneType) {
 						flour.await();
 					}
-					type = 0; // Remove the container from the platform
-					System.out.println("#Crane 2 removed a flour container from the platform.");
-					cargo.signal();
+						type = 0; // Remove the container from the platform
+						System.out.println("#Crane 2 removed a flour container from the platform.");
+						cargo.signal();
 					break;
 				case 3:
 					while (type != craneType) {
 						salt.await();
 					}
-					type = 0; // Remove the container from the platform
-					System.out.println("$Crane 3 removed a salt container from the platform.");
-					cargo.signal();
+						type = 0; // Remove the container from the platform
+						System.out.println("$Crane 3 removed a salt container from the platform.");
+						cargo.signal();
 					break;
 				}
 			} catch (InterruptedException e) {
@@ -60,6 +61,7 @@ public class Platform extends Monitor {
 			} finally {
 				l.unlock();
 			}
+			numContainers--;
 		}
 	}
 
@@ -88,6 +90,7 @@ public class Platform extends Monitor {
 			l.unlock();
 		}
 	}
+
 
 	@Override
 	public void start() {

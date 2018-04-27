@@ -28,6 +28,18 @@ public class Cargo extends Ship {
 		sugarCount = sugar;
 		saltCount = salt;
 	}
+	
+	public int getContNumber(int type){
+		switch(type){
+			case 1:
+				return sugarCount;
+			case 2:
+				return flourCount;
+			case 3:
+				return saltCount;
+		}
+		return 0;
+	}
 
 	/**
 	 * Run Method where it stores sugar, flour and salt until they are empty

@@ -4,7 +4,7 @@ import java.util.concurrent.Semaphore;
 
 
 public class ChargeZone {
-	
+
 
 
 	private Semaphore water = new Semaphore(1);
@@ -46,7 +46,7 @@ public class ChargeZone {
 			System.out.println("ContShip == 5. Filler working...");
 			this.filler();
 			contShip = 0;
-		} 
+		}
 //		else
 //			System.out.println("ContShip == " + contShip + ". Filler IS NOT WORKING.");
 		mutex.release();
@@ -74,13 +74,13 @@ public class ChargeZone {
 		s.waterCont += 1000;
 		water.release();
 	}
-	
+
 	/**
-	 * Mehtod that fills the Oil and Water containers
+	 * Mehtod that fills the Oil containers
 	 * @throws InterruptedException
 	 */
 	public void filler() throws InterruptedException {
-		//TODO Esto debería ser una entidad a parte
+		//TODO Esto deberï¿½a ser una entidad a parte
 		for (int i = 0; i < 5; i++)
 			oil[i].release();
 		System.out.println("filler");
