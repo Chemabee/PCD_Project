@@ -1,11 +1,13 @@
 package ships;
 
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 
 
 public class ChargeZone {
 
-
+	private CyclicBarrier cb = new CyclicBarrier(5);
 
 	private Semaphore water = new Semaphore(1);
 	private Semaphore mutex = new Semaphore(1);
@@ -34,36 +36,26 @@ public class ChargeZone {
 	}
 
 	/**
-	 * Signal done by a ship when it enters in the chargeZone
-	 * @param s :Ship Object
-	 * @throws InterruptedException
-	 */
-	public void shipSignal(OilShip s) throws InterruptedException {
-		System.out.println("ShipSignal " + s.id);
-		mutex.acquire();
-		contShip++;
-		if (contShip == 5) {
-			System.out.println("ContShip == 5. Filler working...");
-			this.filler();
-			contShip = 0;
-		}
-//		else
-//			System.out.println("ContShip == " + contShip + ". Filler IS NOT WORKING.");
-		mutex.release();
-	}
-
-	/**
 	 * Mehtod for getting oil to an OilShip
 	 * @param s :Ship doing the action
 	 * @throws InterruptedException
 	 */
 	public void getOil(OilShip s) throws InterruptedException {
-		shipSignal(s);
-		oil[s.id].acquire();
+//		oil[s.id].acquire();
 		s.oilCont += 1000;
 		System.out.println("Ship " + s.id + " has filled oil. Going to do signal");
+
 	}
 
+	public void shipArrived(){
+		try {
+			cb.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (BrokenBarrierException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Mehtod for getting water to an OilShip
 	 * @param s :Ship doing the action

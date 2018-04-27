@@ -36,6 +36,7 @@ public class OilShip extends Ship {
 	 * @throws InterruptedException
 	 */
 	public void charge() throws InterruptedException {
+		ChargeZone.getChargeZone().shipArrived();
 		System.out.println("Oil task del barco "+this.id);
 		executor.execute(new Task(0,this));
 		System.out.println("Water task del barco "+this.id);
