@@ -3,6 +3,7 @@ package ships;
 public class Main {
 	public static void main(String args[]) {
 
+		Control ctrl = Control.getControl();
 		ChargeZone z = ChargeZone.getChargeZone();
 		Platform p = Platform.getPlatform();
 
@@ -16,10 +17,10 @@ public class Main {
 		salt.start();
 		cargo.start();
 
-		for (int i = 11; i < 21; i++) {
+		for (int i = 31; i < 61; i++) {
 			new Thread(new Ship(0, "SExit " + i)).start();
 		}
-		for (int i = 1; i < 11; i++) {
+		for (int i = 1; i < 31; i++) {
 			new Thread(new Ship(1, "SEnter " + i)).start();
 		}
 		for (int i = 0; i < 5; i++) {
