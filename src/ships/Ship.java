@@ -2,7 +2,7 @@ package ships;
 
 public class Ship implements Runnable {
 	protected int type; // 0=exit; 1=enter
-	protected final String name;
+	public final String name;
 
 	public Ship(int type, String name) {
 		this.type = type;
