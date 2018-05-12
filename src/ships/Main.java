@@ -1,6 +1,7 @@
 package ships;
 
 public class Main {
+	@SuppressWarnings("unused") //To avoid getting warnings by the singleton
 	public static void main(String args[]) {
 
 		Control ctrl = Control.getControl();

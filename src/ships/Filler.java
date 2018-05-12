@@ -22,6 +22,7 @@ public class Filler implements Runnable{
 	public void countDown() {
 		cd.countDown();// Baja en uno el contador del latch
 		SynchronousQueue<OilShip>[] bq = ChargeZone.getChargeZone().getBQ();
+		@SuppressWarnings("unused")
 		OilShip o;
 		for (int i = 0; i < bq.length; i++)
 			 try{
