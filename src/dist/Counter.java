@@ -18,28 +18,36 @@ public class Counter implements ICounter {
 		return instance;
 	}
 	
+	public int getEntering(){
+		return entering;
+	}
+	
+	public int getExiting(){
+		return exiting;
+	}
+	
+	
 	@Override
-	public void entryPermission(Ship s) {
-		// TODO entering++
-
+	public synchronized void entryPermission(Ship s) {
+		// TODO complete entry permission as desired :)
+		entering++;
 	}
 
 	@Override
-	public void exitPermission(Ship s) {
-		// TODO exiting++
-
+	public synchronized void exitPermission(Ship s) {
+		// TODO 
+		exiting++;
 	}
 
 	@Override
-	public void entryNotification(Ship s) {
-		// TODO entering--
-
+	public synchronized void entryNotification(Ship s) {
+		// TODO
+		entering--;
 	}
 
 	@Override
-	public void exitNotification(Ship s) {
-		// TODO exiting--
-
+	public synchronized void exitNotification(Ship s) {
+		// TODO
+		exiting--;
 	}
-
 }
