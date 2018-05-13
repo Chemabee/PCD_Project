@@ -5,7 +5,6 @@ import java.rmi.Naming;
 import java.rmi.server.UnicastRemoteObject;
 
 import pcd.util.Ventana;
-import ships.Ship;
 
 public class Counter implements ICounter {
 

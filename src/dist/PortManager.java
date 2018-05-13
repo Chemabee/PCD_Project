@@ -43,6 +43,7 @@ public class PortManager implements IPortManager {
 		flour++;
 		v.addText("Flour now: "+flour);
 	}
+	
 	public static void main (String[] args){
 		String identificador = "PortManager";
 		

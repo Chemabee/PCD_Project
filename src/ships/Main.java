@@ -7,7 +7,8 @@ public class Main {
 		/*	
 		 * 		CAUTION!!!!!!!!!!!!!!!!!!
 		 * 		1) LAUNCH RMI SERVER
-		 * 		2) LAUNCH Counter.java AS RMI Server BEFORE RUNNING THAT MAIN!!
+		 * 		2) LAUNCH Counter.java AND PortManager.java
+		 * 			as RMI Server BEFORE RUNNING THAT MAIN!!
 		 */
 		
 		Control ctrl = Control.getControl();
