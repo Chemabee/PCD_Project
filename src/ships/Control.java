@@ -63,13 +63,23 @@ public class Control {
 		System.out.println(s.name + " going to enter");
 		entering++;
 		
-		stub.entryPermission(s);
+		try {
+			stub.entryPermission(s);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public synchronized void entryNotification(Ship s) {
 		entering--;
 		
-		stub.entryNotification(s);
+		try {
+			stub.entryNotification(s);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if (entering == 0)
 			notifyAll();
@@ -91,13 +101,23 @@ public class Control {
 		System.out.println(s.name + " going to exit");
 		exiting++;
 		
-		stub.exitPermission(s);
+		try {
+			stub.exitPermission(s);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public synchronized void exitNotification(Ship s) {
 		exiting--;
 		
-		stub.exitNotification(s);
+		try {
+			stub.exitNotification(s);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if (exiting == 0)
 			notifyAll();
