@@ -10,7 +10,7 @@ import pcd.util.Ventana;
 
 public class PortManager implements IPortManager {
 	
-	Ventana v = new Ventana("PortMAnager Server");
+	Ventana v = new Ventana("Port Manager Server");
 	
 	private static PortManager instance=null;
 	
