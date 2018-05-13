@@ -7,9 +7,9 @@ import ships.Ship;
 
 public interface ICounter extends Remote {
 	
-	void entryPermission(Ship s) throws RemoteException;	//A ship calls this method when he wants to enter, just to entering++;
-	void exitPermission(Ship s) throws RemoteException; 	//The same, exiting++
+	void entryPermission() throws RemoteException;	//A ship calls this method when he wants to enter, just to entering++;
+	void exitPermission() throws RemoteException; 	//The same, exiting++
 	
-	void entryNotification(Ship s) throws RemoteException; //entering--
-	void exitNotification(Ship s) throws RemoteException; 	//exiting --
+	void entryNotification() throws RemoteException; //entering--
+	void exitNotification() throws RemoteException; 	//exiting --
 }

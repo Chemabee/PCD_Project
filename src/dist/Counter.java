@@ -32,28 +32,28 @@ public class Counter implements ICounter {
 	
 	
 	@Override
-	public synchronized void entryPermission(Ship s) {
+	public synchronized void entryPermission() {
 		// TODO complete entry permission as desired :)
 		entering++;
 		v.addText("+Now Entering "+entering+" ships");
 	}
 
 	@Override
-	public synchronized void exitPermission(Ship s) {
+	public synchronized void exitPermission() {
 		// TODO 
 		exiting++;
 		v.addText("+Now Exiting "+exiting+" ships");
 	}
 
 	@Override
-	public synchronized void entryNotification(Ship s) {
+	public synchronized void entryNotification() {
 		// TODO
 		entering--;
 		v.addText("-Now Entering "+entering+" ships");
 	}
 
 	@Override
-	public synchronized void exitNotification(Ship s) {
+	public synchronized void exitNotification() {
 		// TODO
 		exiting--;
 		v.addText("-Now Exiting "+exiting+" ships");
@@ -69,9 +69,10 @@ public class Counter implements ICounter {
 			ICounter stub = (ICounter) UnicastRemoteObject.exportObject(obj, 0);
 			Naming.rebind(identificador, stub);
 			System.err.println("Server ready");
+			
 		} catch (Exception e) {
 			System.err.println("Server exception: " + e.toString());
 			e.printStackTrace();
-		}	
+		}
 	}
 }

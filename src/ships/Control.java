@@ -35,6 +35,7 @@ public class Control {
 		try {
 			registry = LocateRegistry.getRegistry("localhost");
 			stub = (ICounter) registry.lookup("CounterServer");
+			System.err.println("CONNECTED!");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -64,7 +65,7 @@ public class Control {
 		entering++;
 		
 		try {
-			stub.entryPermission(s);
+			stub.entryPermission();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,7 +76,7 @@ public class Control {
 		entering--;
 		
 		try {
-			stub.entryNotification(s);
+			stub.entryNotification();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,7 +103,7 @@ public class Control {
 		exiting++;
 		
 		try {
-			stub.exitPermission(s);
+			stub.exitPermission();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,7 +114,7 @@ public class Control {
 		exiting--;
 		
 		try {
-			stub.exitNotification(s);
+			stub.exitNotification();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
