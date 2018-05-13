@@ -1,7 +1,13 @@
 package ships;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.concurrent.locks.*;
 import javax.management.monitor.Monitor;
+
+import dist.IPortManager;
 
 public class Platform extends Monitor {
 
@@ -13,9 +19,25 @@ public class Platform extends Monitor {
 	Condition sugar = l.newCondition();
 	Condition flour = l.newCondition();
 	Condition cargo = l.newCondition();
+	
+	IPortManager stub;
 
 	private Platform() {
 		type = 0;
+		
+		Registry registry;
+		System.err.println("CONNECTING TO PORTMANAGER...");
+
+			try {
+				registry = LocateRegistry.getRegistry("localhost");
+				stub = (IPortManager) registry.lookup("PortManager");
+				System.err.println("CONNECTED!");
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			} catch (NotBoundException e) {
+				e.printStackTrace();
+			}
+
 	}
 
 	public static Platform getPlatform() {
@@ -24,10 +46,10 @@ public class Platform extends Monitor {
 		return instance;
 	}
 
-	void getProduct(int craneType, Cargo c) {
+	void getProduct(int craneType, Cargo c) throws RemoteException {
 		int numContainers = 0;
 		numContainers = c.getContNumber(craneType);
-		while (numContainers>0) {// sabemos que esto es incorrecto, pero lo dejaremos as� hasta corregir el codigo
+		while (numContainers>0) {
 			l.lock();
 			try {
 				switch (craneType) {
@@ -36,6 +58,9 @@ public class Platform extends Monitor {
 						sugar.await();
 					}
 						type = 0; // Remove the container from the platform
+						
+						stub.incSugar();
+						
 						System.out.println("*Crane 1 removed a sugar container from the platform.");
 						cargo.signal();
 					break;
@@ -44,6 +69,9 @@ public class Platform extends Monitor {
 						flour.await();
 					}
 						type = 0; // Remove the container from the platform
+						
+						stub.incFlour();
+						
 						System.out.println("#Crane 2 removed a flour container from the platform.");
 						cargo.signal();
 					break;
@@ -52,6 +80,9 @@ public class Platform extends Monitor {
 						salt.await();
 					}
 						type = 0; // Remove the container from the platform
+						
+						stub.incSalt();
+						
 						System.out.println("$Crane 3 removed a salt container from the platform.");
 						cargo.signal();
 					break;

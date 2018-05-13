@@ -68,7 +68,7 @@ public class Counter implements ICounter {
 			ICounter obj = (ICounter) getCounter();
 			ICounter stub = (ICounter) UnicastRemoteObject.exportObject(obj, 0);
 			Naming.rebind(identificador, stub);
-			System.err.println("Server ready");
+			System.err.println("Counter Server ready");
 			
 		} catch (Exception e) {
 			System.err.println("Server exception: " + e.toString());
