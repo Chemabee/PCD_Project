@@ -32,7 +32,7 @@ public class Control {
 		Registry registry;
 		System.err.println("CONNECTING TO COUNTER...");
 		try {
-			registry = LocateRegistry.getRegistry("localhost");
+			registry = LocateRegistry.getRegistry("localhost", Main.port);
 			stub = (ICounter) registry.lookup("CounterServer");
 			System.err.println("CONNECTED!");
 		} catch (RemoteException e) {
@@ -42,7 +42,7 @@ public class Control {
 		}
 		
 	}
-
+	
 	public static Control getControl() {
 		if (instance == null)
 			instance = new Control();

@@ -29,7 +29,7 @@ public class Platform extends Monitor {
 		System.err.println("CONNECTING TO PORTMANAGER...");
 
 			try {
-				registry = LocateRegistry.getRegistry("localhost");
+				registry = LocateRegistry.getRegistry("localhost", Main.port);
 				stub = (IPortManager) registry.lookup("PortManager");
 				System.err.println("CONNECTED!");
 			} catch (RemoteException e) {
