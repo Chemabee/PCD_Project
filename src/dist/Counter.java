@@ -13,12 +13,8 @@ public class Counter implements ICounter {
 	
 	private int entering = 0;
 	private int exiting = 0;
-	
 	private static Counter instance=null;
 	
-	private Counter(){
-		//TODO
-	}
 	
 	public static Counter getCounter(){
 		if(instance == null)
@@ -62,12 +58,14 @@ public class Counter implements ICounter {
 		exiting--;
 		v.addText("-Now Exiting "+exiting+" ships");
 	}
+	
+	
 	public static void main (String[] args){
 		String identificador;
 		
 		identificador = "CounterServer";
-		ICounter obj = (ICounter) getCounter();
 		try {
+			ICounter obj = (ICounter) getCounter();
 			ICounter stub = (ICounter) UnicastRemoteObject.exportObject(obj, 0);
 			Naming.rebind(identificador, stub);
 			System.err.println("Server ready");

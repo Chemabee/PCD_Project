@@ -10,9 +10,9 @@ import dist.ICounter;
 
 public class Control {
 
+	//CONCURRENT
 	private int entering;
 	private int exiting;
-	private String myIp;
 
 	private int waitExit;
 
@@ -21,8 +21,12 @@ public class Control {
 	private LinkedList<Ship> EntryQueue = new LinkedList<Ship>();
 	private LinkedList<Ship> ExitQueue = new LinkedList<Ship>();
 	
+	
+	//DISTRIBUTED
+//	private String myIp;
 	ICounter stub;
 
+	
 	private Control() {
 		entering = 0;
 		exiting = 0;

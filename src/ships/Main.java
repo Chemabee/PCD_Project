@@ -4,6 +4,12 @@ public class Main {
 	@SuppressWarnings("unused") //To avoid getting warnings by the singleton
 	public static void main(String args[]) {
 
+		/*	
+		 * 		CAUTION!!!!!!!!!!!!!!!!!!
+		 * 		1) LAUNCH RMI SERVER
+		 * 		2) LAUNCH Counter.java AS RMI Server BEFORE RUNNING THAT MAIN!!
+		 */
+		
 		Control ctrl = Control.getControl();
 		ChargeZone z = ChargeZone.getChargeZone();
 		Platform p = Platform.getPlatform();
