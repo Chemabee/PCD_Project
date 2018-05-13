@@ -2,6 +2,8 @@ package dist;
 
 
 import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import pcd.util.Ventana;
@@ -64,11 +66,19 @@ public class Counter implements ICounter {
 		
 		identificador = "CounterServer";
 		try {
-			ICounter obj = (ICounter) getCounter();
-			ICounter stub = (ICounter) UnicastRemoteObject.exportObject(obj, 0);
-			Naming.rebind(identificador, stub);
-			System.err.println("Counter Server ready");
-			
+			if(args.length>0){ //Eric tiene un problemita y su ordenador no quiere trabajar en el puerto 1099
+				ICounter obj = (ICounter) getCounter();
+				ICounter stub = (ICounter) UnicastRemoteObject.exportObject(obj, 0);
+				Registry r = LocateRegistry.getRegistry(1098);
+				r.bind(identificador, stub);
+				System.err.println("Counter Server ready");
+			}
+			else{
+				ICounter obj = (ICounter) getCounter();
+				ICounter stub = (ICounter) UnicastRemoteObject.exportObject(obj, 0);
+				Naming.rebind(identificador, stub);
+				System.err.println("Counter Server ready");
+			}
 		} catch (Exception e) {
 			System.err.println("Server exception: " + e.toString());
 			e.printStackTrace();

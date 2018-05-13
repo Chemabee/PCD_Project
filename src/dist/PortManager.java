@@ -1,8 +1,9 @@
 package dist;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import pcd.util.Ventana;
@@ -47,16 +48,23 @@ public class PortManager implements IPortManager {
 	public static void main (String[] args){
 		String identificador = "PortManager";
 		
-		IPortManager obj = (IPortManager) getPortManager();
-		IPortManager stub;
+		
 		try {
-			stub = (IPortManager) UnicastRemoteObject.exportObject(obj,0);
-			Naming.rebind(identificador, stub);
-			System.err.println("PortManager Server ready");
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			System.err.println("Server exception: " + e.toString());
+			if(args.length>0){ //Eric tiene un problemita y su ordenador no quiere trabajar en el puerto 1099
+				IPortManager obj = (IPortManager) getPortManager();
+				IPortManager stub = (IPortManager) UnicastRemoteObject.exportObject(obj,0);
+				Registry r = LocateRegistry.getRegistry(1098);
+				r.bind(identificador, stub);
+				System.err.println("PortManager Server ready");
+			}
+			else{
+				IPortManager obj = (IPortManager) getPortManager();
+				IPortManager stub = (IPortManager) UnicastRemoteObject.exportObject(obj,0);
+				Naming.rebind(identificador, stub);
+				System.err.println("PortManager Server ready");
+			}
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
