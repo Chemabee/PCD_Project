@@ -27,7 +27,7 @@ public class OilShip extends Ship {
 		}
 		executor.shutdown();//Before exiting it waits the tasks to finish, and it doesn't accept any more tasks.
 		while(executor.getPoolSize()>0);
-			this.action(); //TODO no puede hacer esto hasta que haya cargado aceite y agua, hay que corregirlo.
+			this.action();
 
 	}
 

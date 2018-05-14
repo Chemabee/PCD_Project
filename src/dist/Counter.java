@@ -34,28 +34,24 @@ public class Counter implements ICounter {
 	
 	@Override
 	public synchronized void entryPermission() {
-		// TODO complete entry permission as desired :)
 		entering++;
 		v.addText("+Now Entering "+entering+" ships");
 	}
 
 	@Override
 	public synchronized void exitPermission() {
-		// TODO 
 		exiting++;
 		v.addText("+Now Exiting "+exiting+" ships");
 	}
 
 	@Override
 	public synchronized void entryNotification() {
-		// TODO
 		entering--;
 		v.addText("-Now Entering "+entering+" ships");
 	}
 
 	@Override
 	public synchronized void exitNotification() {
-		// TODO
 		exiting--;
 		v.addText("-Now Exiting "+exiting+" ships");
 	}
