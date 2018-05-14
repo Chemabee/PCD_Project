@@ -25,7 +25,6 @@ public class PortManager implements IPortManager {
 		return instance;
 	}
 	
-//No se si es necesario el synchronized
 	@Override
 	public synchronized void incSalt()  throws RemoteException{
 		salt++;
@@ -47,7 +46,6 @@ public class PortManager implements IPortManager {
 	
 	public static void main (String[] args){
 		String identificador = "PortManager";
-		
 		
 		try {
 			if(args.length>0){ //Eric tiene un problemita y su ordenador no quiere trabajar en el puerto 1099

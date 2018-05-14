@@ -13,8 +13,7 @@ public class ChargeZone {
 	private SynchronousQueue<OilShip>[] bq = new SynchronousQueue[5];
 
 	private Semaphore water = new Semaphore(1);
-//	private Semaphore mutex = new Semaphore(1);
-
+//	private Semaphore mutex = new Semaphore(1); //Those were used in older steps of the project
 //	private int contShip = 0;
 	
 	private Filler filler;
@@ -71,8 +70,6 @@ public class ChargeZone {
 	 * @throws InterruptedException
 	 */
 	public void getWater(OilShip s) throws InterruptedException {
-		//TODO aqui no creo que haga falta usar nada
-		//El semáforo sí, para que no cojan agua varios a la vez (sólo hay un almacén de agua)
 		water.acquire();
 		s.waterCont += 1000;
 		water.release();

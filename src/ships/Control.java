@@ -66,7 +66,6 @@ public class Control {
 		try {
 			stub.entryPermission();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -77,7 +76,6 @@ public class Control {
 		try {
 			stub.entryNotification();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -104,7 +102,6 @@ public class Control {
 		try {
 			stub.exitPermission();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -115,7 +112,6 @@ public class Control {
 		try {
 			stub.exitNotification();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

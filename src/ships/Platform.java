@@ -99,9 +99,8 @@ public class Platform extends Monitor {
 	void depositProduct(int containerType) {
 		l.lock();
 		try {
-			while (type != 0)// si hay algo en la plataforma->espera hasta que haya hueco
+			while (type != 0)// if there's something in the platform-> wait until there's nothing
 				cargo.await();
-			// si hay hueco en la plataforma deja su contenedor ahi
 			type = containerType; // Deposit the item in the Platform
 			System.out.println("Cargo ship has deposited a container " + type + " in the platform.");
 			switch (type) {
@@ -126,13 +125,11 @@ public class Platform extends Monitor {
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
-
 	}
 
 }

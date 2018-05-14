@@ -2,8 +2,6 @@ package ships;
 
 public class Gate {
 
-	// private int id;
-
 	private static Gate instance;
 
 	private Gate() {

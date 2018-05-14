@@ -25,9 +25,9 @@ public class OilShip extends Ship {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		executor.shutdown();//antes de salir espera a acabar con las tareas, no acepta nuevas
-		while(executor.getPoolSize()>0);//TODO cambiar esto que es busywaiting
-		this.action(); //TODO no puede hacer esto hasta que haya cargado aceite y agua, hay que corregirlo.
+		executor.shutdown();//Before exiting it waits the tasks to finish, and it doesn't accept any more tasks.
+		while(executor.getPoolSize()>0);
+			this.action(); //TODO no puede hacer esto hasta que haya cargado aceite y agua, hay que corregirlo.
 
 	}
 

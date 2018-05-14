@@ -20,7 +20,7 @@ public class Filler implements Runnable{
     }
     
 	public void countDown() {
-		cd.countDown();// Baja en uno el contador del latch
+		cd.countDown();// Decrements by 1 the counter of the latch
 		SynchronousQueue<OilShip>[] bq = ChargeZone.getChargeZone().getBQ();
 		@SuppressWarnings("unused")
 		OilShip o;
@@ -43,10 +43,10 @@ public class Filler implements Runnable{
 	}
     
     public void run(){
-    	for (int i = 0; i < 5; i++) {//TODO poner una condicion mejor que detecte cuando esperar y cuando no, aunque dejarlo como true tampoco pasa nada
+    	for (int i = 0; i < 5; i++) {
     		try {
     			cd.await();
-    			cd = new CountDownLatch(5);//Recarga el latch a 5
+    			cd = new CountDownLatch(5);//Reloads the latch to 5
     		} catch (InterruptedException e) {
     			e.printStackTrace();
     		}
