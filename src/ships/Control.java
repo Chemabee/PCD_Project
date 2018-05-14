@@ -25,7 +25,9 @@ public class Control {
 //	private String myIp;
 	ICounter stub;
 
-	
+	/**
+	 * Default constructor
+	 */
 	private Control() {
 		entering = 0;
 		exiting = 0;
@@ -43,13 +45,20 @@ public class Control {
 		
 	}
 	
+	/**
+	 * Singleton pattern of the Control
+	 * @return the instance of Control
+	 */
 	public static Control getControl() {
 		if (instance == null)
 			instance = new Control();
 		return instance;
 	}
 
-	// Entry protocol
+	/**
+	 * Entry protocol
+	 * @param s Ship that is trying to entry through the Gate
+	 */
 	public synchronized void entryPermission(Ship s) {
 		EntryQueue.add(s);
 		while (exiting > 0 || waitExit > 0 || EntryQueue.peekFirst() != s)
@@ -70,6 +79,10 @@ public class Control {
 		}
 	}
 
+	/**
+	 * Entry notification
+	 * @param s Ship that has finished entering through the Gate
+	 */
 	public synchronized void entryNotification(Ship s) {
 		entering--;
 		
@@ -83,7 +96,10 @@ public class Control {
 			notifyAll();
 	}
 
-	// Exit protocol
+	/**
+	 * Exit protocol
+	 * @param s	Ship that is trying to exit through the Gate
+	 */
 	public synchronized void exitPermission(Ship s) {
 		ExitQueue.add(s);
 		while (entering > 0 || ExitQueue.peekFirst() != s)
@@ -106,6 +122,10 @@ public class Control {
 		}
 	}
 
+	/**
+	 * Exit notification
+	 * @param s Ship that has finished exiting through the Gate
+	 */
 	public synchronized void exitNotification(Ship s) {
 		exiting--;
 		

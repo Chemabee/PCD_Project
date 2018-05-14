@@ -22,6 +22,9 @@ public class Platform extends Monitor {
 	
 	IPortManager stub;
 
+	/**
+	 * Default constructor
+	 */
 	private Platform() {
 		type = 0;
 		
@@ -40,12 +43,22 @@ public class Platform extends Monitor {
 
 	}
 
+	/**
+	 * Singleton for the Platform
+	 * @return instance of the Platform
+	 */
 	public static Platform getPlatform() {
 		if (instance == null)
 			instance = new Platform();
 		return instance;
 	}
 
+	/**
+	 * A Crane tries to get the container that is currently in the platform 
+	 * @param craneType Type of the crane that is trying to get the container
+	 * @param c Cargo ship that is putting its containers in the platform
+	 * @throws RemoteException
+	 */
 	void getProduct(int craneType, Cargo c) throws RemoteException {
 		int numContainers = 0;
 		numContainers = c.getContNumber(craneType);
@@ -96,6 +109,10 @@ public class Platform extends Monitor {
 		}
 	}
 
+	/**
+	 * The Cargo ship tries to deposit a container in the platform
+	 * @param containerType Type of the container that the Cargo ship is trying to deposit
+	 */
 	void depositProduct(int containerType) {
 		l.lock();
 		try {

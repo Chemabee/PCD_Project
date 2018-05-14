@@ -9,16 +9,27 @@ public class Filler implements Runnable{
     private CountDownLatch cd;
     private int cont=0;
 
+    /**
+     * Default constructor
+     */
     private Filler(){
     	cd = new CountDownLatch(5);
     }
 
+    /**
+     * Singleton pattern
+     * @return instance of the Filler
+     */
     public static Filler getFiller(){
       if(instance == null)
         instance = new Filler();
       return instance;
     }
     
+    /**
+     * Decrement the counter of the countDownLatch by 1
+     * If all ships have finished  refuelling, refill the oil containers.
+     */
 	public void countDown() {
 		cd.countDown();// Decrements by 1 the counter of the latch
 		SynchronousQueue<OilShip>[] bq = ChargeZone.getChargeZone().getBQ();

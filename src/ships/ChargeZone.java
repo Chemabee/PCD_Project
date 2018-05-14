@@ -55,6 +55,9 @@ public class ChargeZone {
 		System.out.println("Ship " + s.id + " has filled oil. Going to do signal");
 	}
 
+	/**
+	 * Notifies the cyclic barrier and wait for the other 4 ships to arrive.
+	 */
 	public void shipArrived(){
 		try {
 			cb.await();
@@ -64,6 +67,7 @@ public class ChargeZone {
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * Mehtod for getting water to an OilShip
 	 * @param s :Ship doing the action
@@ -75,6 +79,10 @@ public class ChargeZone {
 		water.release();
 	}
 
+	/**
+	 * Get the SynchronousQueue of the ships
+	 * @return returns a Synchronous Queue of the ships. It is useful for the Filler.
+	 */
 	public SynchronousQueue<OilShip>[] getBQ(){
 		return this.bq;
 	}

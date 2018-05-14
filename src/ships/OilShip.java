@@ -11,6 +11,12 @@ public class OilShip extends Ship {
 
 	private ThreadPoolExecutor executor;
 
+	/**
+	 * Parameterized constructor
+	 * @param type Type of the Ship
+	 * @param name Name of the Ship
+	 * @param id ID of the Ship
+	 */
 	public OilShip(int type, String name, int id) {
 		super(type, name);
 		this.id = id;
@@ -44,6 +50,10 @@ public class OilShip extends Ship {
 
 	}
 
+	/**
+	 * Get oil from the Charge Zone until the ship has 3000 liters.
+	 * @throws InterruptedException
+	 */
 	public void getOilAction() throws InterruptedException {
 		while (oilCont < 3000) {
 			System.out.println("ship " + this.id + " GOING to GET OIL");
@@ -54,6 +64,10 @@ public class OilShip extends Ship {
 
 	}
 
+	/**
+	 * Get water from the Charge Zone until the ship has 5000 liters.
+	 * @throws InterruptedException
+	 */
 	public void getWaterAction() throws InterruptedException {
 		while (waterCont < 5000) {
 			ChargeZone.getChargeZone().getWater(this);

@@ -5,15 +5,17 @@ public class Cargo extends Ship {
 	int flourCount; // 2
 	int sugarCount; // 1
 	int saltCount; // 3
-/**
- * Default constructor
- */
+	
+	/**
+ 	*Default constructor
+ 	*/
 	public Cargo() {
 		super(1, "CARGOShip");
 		flourCount = 20;
 		sugarCount = 12;
 		saltCount = 5;
 	}
+	
 	/**
 	 * Parametriced Constructor
 	 * @param type :Direction of the cargo (entering/exiting)
@@ -29,6 +31,11 @@ public class Cargo extends Ship {
 		saltCount = salt;
 	}
 	
+	/**
+	 * Get the number of containers of the Cargo ship of an specified type
+	 * @param type type of container
+	 * @return	integer with the number of containers of the specified type remaining in the Cargo ship
+	 */
 	public int getContNumber(int type){
 		switch(type){
 			case 1:
@@ -42,7 +49,7 @@ public class Cargo extends Ship {
 	}
 
 	/**
-	 * Run Method where it stores sugar, flour and salt until they are empty
+	 * Run Method where it puts sugar, flour and salt containers in the platform until the Cargo ship is empty
 	 */
 	public void run() {
 		while (sugarCount > 0) {

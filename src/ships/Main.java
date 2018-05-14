@@ -18,13 +18,15 @@ public class Main {
 		if(args.length>0)
 			port = Integer.parseInt(args[0]);
 		else port = 1099;
+		
+		// Create instances of the Classes with Singleton Pattern
 		Control ctrl = Control.getControl();
 		ChargeZone z = ChargeZone.getChargeZone();
 		Platform p = Platform.getPlatform();
 		Filler f = Filler.getFiller();
 
+		
 		// Cargo Part
-
 		Cargo c = new Cargo();
 		Thread cargo = new Thread(c);
 		Thread sugar = new Thread(new Crane(1, c));
@@ -35,8 +37,8 @@ public class Main {
 		salt.start();
 		cargo.start();
 
+		
 		// Enter/Exit Part
-
 		for (int i = 11; i < 21; i++) {
 			new Thread(new Ship(0, "SExit " + i)).start();
 		}
@@ -44,8 +46,8 @@ public class Main {
 			new Thread(new Ship(1, "SEnter " + i)).start();
 		}
 
+		
 		// OilShip Part
-
 		for (int i = 0; i < 5; i++) {
 			new Thread(new OilShip(1, "OilShip " + i, i)).start();
 		}

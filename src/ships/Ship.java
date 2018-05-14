@@ -9,6 +9,9 @@ public class Ship implements Runnable {
 		this.name = name;
 	}
 
+	/**
+	 * Try to enter or exit through the Gate depending on the type of the Ship
+	 */
 	public void action() {
 		switch (this.type) {
 		case (0):

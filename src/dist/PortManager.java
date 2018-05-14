@@ -18,19 +18,28 @@ public class PortManager implements IPortManager {
 	int sugar = 0;
 	int flour = 0;
 	
-	
+	/**
+	 * Singleton pattern of the PortManager
+	 * @return instance of the PortManager
+	 */
 	public static PortManager getPortManager(){
 		if(instance == null)
 			instance = new PortManager();
 		return instance;
 	}
 	
+	/**
+	 * Increments the number of salt containers downloaded during a day
+	 */
 	@Override
 	public synchronized void incSalt()  throws RemoteException{
 		salt++;
 		v.addText("Salt now: "+salt);
 	}
-
+	
+	/**
+	 * Increments the number of sugar containers downloaded during a day
+	 */
 	@Override
 	public synchronized void incSugar()  throws RemoteException{
 		sugar++;
@@ -38,12 +47,20 @@ public class PortManager implements IPortManager {
 
 	}
 
+	/**
+	 * Increments the number of flour containers downloaded during a day
+	 */
 	@Override
 	public synchronized void incFlour()  throws RemoteException{
 		flour++;
 		v.addText("Flour now: "+flour);
 	}
 	
+	/**
+	 * Main program of the PortManager Server
+	 * @param args args[0] must contain the port of the RMI Registry.
+	 * If it is empty, it will use the default port (1099).
+	 */
 	public static void main (String[] args){
 		String identificador = "PortManager";
 		

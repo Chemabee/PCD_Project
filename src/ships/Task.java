@@ -6,7 +6,11 @@ public class Task implements Runnable {
 	
 	private OilShip s;//ship doing the task
 	
-
+	/**
+	 * Parameterized constructor for the Task of the OilShip
+	 * @param _type Type of the task (0=Oil, 1=Water)
+	 * @param _s The Oil Ship whose this Task belongs to
+	 */
 	public Task(int _type,OilShip _s) {
 		type = _type;
 		s = _s;
